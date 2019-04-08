@@ -62,7 +62,7 @@ $(document).ready(function() {
 
     $('#proyecto_add').change(function(){
         var proyecto = $('#proyecto_add').val();
-        if(proyecto == 3){
+        if((proyecto == 1 )||(proyecto == 3 )||(proyecto == 4 )||(proyecto == 5 )){
             $('#modalidad_add').show();
         }else{
             $('#modalidad_add').hide();
@@ -70,7 +70,7 @@ $(document).ready(function() {
     })
 
     var proyecto_edit = $('#proyecto_edit').val();
-    if(proyecto_edit == 3){
+    if(proyecto_edit == 1){
         $('#modalidad_edit').show();
     }else{
         $('#modalidad_edit').hide();

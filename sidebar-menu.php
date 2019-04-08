@@ -1,5 +1,5 @@
 	<?php 
-	if($_SESSION['permiso_acceso']==1){
+	if($_SESSION['permiso_acceso']==1){ /// si es el administrador
 
 	?>
     <ul class="sidebar-menu">
@@ -92,7 +92,7 @@
 	</ul>
 	<?php 
 	} 
-	else{	// si no es admin
+	else if($_SESSION['permiso_acceso']!=1){	// si no es administrador
 	?>
 	<ul class="sidebar-menu">
         <li class="header">MENU</li>
@@ -137,10 +137,16 @@
 	<?php
 	} ?>
 	</ul>
-
-
+	
 	<?php
 		}
 	?>
 
-
+<footer style="   position:fixed;
+   left:0px;
+   bottom:0px;
+   height:30px;
+	 width:100%;
+	 color : white;">
+        <strong>Copyright &copy; <?php echo date('Y');?> - <a href="https://ionic-7288a.firebaseapp.com/" target="_blank" style="color:red;">ON-GNIOS</a></strong>
+</footer>

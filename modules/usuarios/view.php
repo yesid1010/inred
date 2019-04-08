@@ -103,15 +103,17 @@
                         <div>
                           <a data-toggle='tooltip' data-placement='top' title='Detalles' style='margin-right:5px' class='btn btn-primary btn-sm' href='?module=form_medicines&form=detalles&id=$data[identificacion]'>
                               <i style='color:#fff' class='glyphicon glyphicon-search'></i>
-                          </a>
-                          <a data-toggle='tooltip' data-placement='top' title='modificar' style='margin-right:5px' class='btn btn-primary btn-sm' href='?module=form_medicines&form=edit&id=$data[identificacion]'>
+                          </a>"?> 
+                          <?php if($_SESSION['permiso_acceso']!=3){ ?>
+                          
+                          <a data-toggle='tooltip' data-placement='top' title='modificar' style='margin-right:5px' class='btn btn-primary btn-sm' href="?module=form_medicines&form=edit&id=<?php echo $data['identificacion'];?>">
                               <i style='color:#fff' class='glyphicon glyphicon-edit'></i>
-                          </a>";
-            ?>
+                          </a>
+
                           <a data-toggle="tooltip" data-placement="top" title="Eliminar" class="btn btn-danger btn-sm" href="modules/usuarios/proses.php?act=delete&id=<?php echo $data['identificacion'];?>" onclick="return confirm('estas seguro de eliminar<?php echo $data['nombre']; ?> ?');">
                               <i style="color:#fff" class="glyphicon glyphicon-trash"></i>
                           </a>
-            <?php
+                          <?php }
               echo "    </div>
                       </td>
                     </tr>";

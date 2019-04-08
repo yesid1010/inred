@@ -22,6 +22,8 @@ if (isset($_GET['id'])) {
     usuarios.modalidad AS modalidad,
     usuarios.barrio_proyecto AS barrio_proyecto,
     usuarios.acudiente AS acudiente,
+    usuarios.parentezco AS parentezco,
+    usuarios.cedula_acudiente AS cedula_acudiente,
     usuarios.cel_acudiente AS cel_acudiente,
     usuarios.correo_acudiente AS correo_acudiente,
     barrios.idbarrios AS idbarrio,
@@ -52,7 +54,7 @@ if (isset($_GET['id'])) {
         <div class="box box-primary">
           <!-- form start -->
           <form role="form" class="form-horizontal" action="modules/usuarios/proses.php?act=update" method="POST">
-            <div class="box-body">
+          <div class="box-body">
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="col-sm-4 control-label">Identificación</label>
@@ -124,12 +126,8 @@ if (isset($_GET['id'])) {
                     </select>
                   </div>
                 </div>
-
-             </div> <!-- div col 4-->
-
-             <div class="col-md-4">
-             <div class="form-group">
-                  <label class="col-sm-5 control-label">Barrio</label>
+                <div class="form-group">
+                  <label class="col-sm-4 control-label">Barrio</label>
                   <div class="col-sm-7">
                     <select class="chosen-select" name="barrio" data-placeholder="Barrio" autocomplete="off" required>
                       <option value="<?php echo $data['idbarrio']; ?>"><?php echo $data['barrio']; ?></option>
@@ -142,12 +140,18 @@ if (isset($_GET['id'])) {
                     </select>
                   </div>
                </div>
-                <div class="form-group">
-                  <label class="col-sm-5 control-label">Correo</label>
+
+               <div class="form-group">
+                  <label class="col-sm-4 control-label">Correo</label>
                   <div class="col-sm-7">
                     <input type="email" class="form-control" value="<?php echo $data['correo'];?>" name="correo" autocomplete="off" >
                   </div>
                 </div>
+             </div> <!-- div col 4-->
+
+             <div class="col-md-4">
+
+
                 <div class="form-group">
                   <label class="col-sm-5 control-label">Celular</label>
                   <div class="col-sm-7">
@@ -203,10 +207,9 @@ if (isset($_GET['id'])) {
                       <input type="text" class="form-control" value="<?php echo $data['eps']; ?>"  name="eps" autocomplete="off" required>
                     </div>
                 </div>
-             </div> <!-- div col 4-->
-
-             <div class="col-md-4">
-              <div class="form-group">
+                <P style="text-align: center;"> <b>DATOS DEL PROYECTO</b> </P>
+                          <hr>
+                <div class="form-group">
                   <label class="col-sm-5 control-label">Proyecto</label>
                   <div class="col-sm-7">
                     <select class="chosen-select" name="proyecto" id="proyecto_edit" data-placeholder="-- Seleccionar --" autocomplete="off" required>
@@ -222,9 +225,9 @@ if (isset($_GET['id'])) {
               </div>
               <div id="modalidad_edit">
                 <div class="form-group" >
-                  <label class="col-sm-5   control-label">Modalidad</label>
+                  <label class="col-sm-5   control-label">Deportes</label>
                   <div class="col-sm-7">
-                    <select class="chosen-select" name="modalidad"  data-placeholder="-- Seleccionar --" autocomplete="off" >
+                    <select class="form-control" name="modalidad"  data-placeholder="-- Seleccionar --" autocomplete="off" >
                       <option value="<?php echo $data['modalidad']?>"><?php echo $data['modalidad']?></option>
                       <option value="Futbol">Futbol</option>
                       <option value="Softbol">Softbol</option>
@@ -242,7 +245,6 @@ if (isset($_GET['id'])) {
                   </div>
                 </div>
               </div>
-                
               <div class="form-group">
                 <label class="col-sm-5 control-label">Barrio Proyecto</label>
                 <div class="col-sm-7">
@@ -257,23 +259,44 @@ if (isset($_GET['id'])) {
                   </select>
                 </div>
               </div>
+             </div> <!-- div col 4-->
+
+             <div class="col-md-4">
+                
+
               <?php
                 if($data['edad'] < 18){?>
                   <div id="edit_acudiente">
+                    <br>
+                  <P style="text-align: center;"> <b>DATOS DEL ACUDIENTE</b> </P>
+                          <hr>
+                        
+                  <div class="form-group">
+                      <label class="col-sm-5 control-label">Parentezco</label>
+                      <div class="col-sm-7">
+                        <input type="text" class="form-control" value = "<?php echo $data['parentezco']?>" name="acudiente" autocomplete="off" >
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-sm-5 control-label">Cedula</label>
+                      <div class="col-sm-7">
+                         <input type="text" class="form-control" value = "<?php echo $data['cedula_acudiente']?>" name="acudiente" autocomplete="off" >
+                      </div>
+                  </div>
                       <div class="form-group">
-                        <label class="col-sm-5 control-label">Acudiente</label>
+                        <label class="col-sm-5 control-label">Nombre</label>
                         <div class="col-sm-7">
                           <input type="text" class="form-control" value = "<?php echo $data['acudiente']?>" name="acudiente" autocomplete="off" >
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="col-sm-5 control-label">Celular Acu.</label>
+                        <label class="col-sm-5 control-label">Celular</label>
                         <div class="col-sm-7">
                           <input type="text" class="form-control" value = "<?php echo $data['cel_acudiente']?>" name="cel_acudiente" autocomplete="off" >
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="col-sm-5 control-label">Correo Acudiente</label>
+                        <label class="col-sm-5 control-label">Correo</label>
                         <div class="col-sm-7">
                           <input type="text" class="form-control" value = "<?php echo $data['correo_acudiente']?>" name="correo_acudiente" autocomplete="off"  >
                         </div>
@@ -281,20 +304,34 @@ if (isset($_GET['id'])) {
                   </div>
               <?php }else {?>
                 <div id="edit_acudiente">
+                <P style="text-align: center;"> <b>DATOS DEL ACUDIENTE</b> </P>
+                          <hr>
+                          <div class="form-group">
+                      <label class="col-sm-5 control-label">Parentezco</label>
+                      <div class="col-sm-7">
+                        <input type="text" class="form-control" value = "<?php echo $data['parentezco']?>" name="parentezco" autocomplete="off" >
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-sm-5 control-label">Cedula</label>
+                      <div class="col-sm-7">
+                         <input type="text" class="form-control" value = "<?php echo $data['cedula_acudiente']?>" name="cedula_acudiente" autocomplete="off" >
+                      </div>
+                  </div>
                       <div class="form-group">
-                        <label class="col-sm-5 control-label">Acudiente</label>
+                        <label class="col-sm-5 control-label">Nombre</label>
                         <div class="col-sm-7">
                           <input type="text" class="form-control" value = "<?php echo $data['acudiente']?>" name="acudiente" autocomplete="off" >
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="col-sm-5 control-label">Celular Acu.</label>
+                        <label class="col-sm-5 control-label">Celular</label>
                         <div class="col-sm-7">
                           <input type="text" class="form-control" value = "<?php echo $data['cel_acudiente']?>" name="cel_acudiente" autocomplete="off" >
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="col-sm-5 control-label">Correo Acudiente</label>
+                        <label class="col-sm-5 control-label">Correo</label>
                         <div class="col-sm-7">
                           <input type="text" class="form-control" value = "<?php echo $data['correo_acudiente']?>" name="correo_acudiente" autocomplete="off"  >
                         </div>

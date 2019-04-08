@@ -142,7 +142,7 @@ session_start();
       </div><!-- /.content-wrapper -->
 
       <footer class="main-footer">
-        <strong>Copyright &copy; <?php echo date('Y');?> - <a href="http://facebook.com/yesid1010" target="_blank">ON-GNIOS</a>.</strong>
+         <strong> <a href="https://ionic-7288a.firebaseapp.com/" target="_blank">ON-GNIOS</a>.</strong>
       </footer>
     </div><!-- ./wrapper -->
 

@@ -88,8 +88,9 @@
               <tr>
                 <th class="center">No.</th>
                 <th class="center">Nombre</th>
+                <th class="center">Comuna</th>
                 <th class="center">Localidad</th>
-                <th class="center">Modificar</th>
+                <th class="center"></th>
               </tr>
             </thead>
 
@@ -99,10 +100,13 @@
             $no = 1;
       
             $query = mysqli_query($mysqli, "SELECT barrios.nombre AS nombre,
-                                                   barrios.idlocalidad AS idlocalidad,
+                                                   barrios.idcomuna AS idcomuna,
+                                                   localidad.idlocalidad AS idlocalidad,
                                                    barrios.idbarrios AS idbarrios,
-                                                   localidad.nombre AS localidad
-                                                   FROM barrios INNER JOIN localidad ON barrios.idlocalidad = localidad.idlocalidad ORDER BY nombre DESC")
+                                                   localidad.nombre AS localidad,
+                                                   comunas.nombre AS comuna
+                                                   FROM barrios INNER JOIN comunas ON barrios.idcomuna = comunas.idcomuna
+                                                   INNER JOIN localidad ON comunas.idlocalidad = localidad.idlocalidad ORDER BY localidad ASC")
                                             or die('error: '.mysqli_error($mysqli));
 
 
@@ -113,6 +117,7 @@
 
 
               echo "  <td class='center'>$data[nombre]</td>
+                      <td class='center'>$data[comuna]</td>
                       <td class='center'>$data[localidad]</td>
                     
 

@@ -14,12 +14,12 @@ else {*/
         if (isset($_POST['Guardar'])) {
      
             $nombre  = mysqli_real_escape_string($mysqli, trim($_POST['nombre']));
-            $localidad  = mysqli_real_escape_string($mysqli, trim($_POST['localidad']));
+            $comuna  = mysqli_real_escape_string($mysqli, trim($_POST['comuna']));
 
             // convertir a mayuscula solo el primer caracter
             $nombre = ucwords(strtolower($nombre));
 
-            $sql = mysqli_query($mysqli,"INSERT INTO barrios(nombre,idlocalidad)VALUES ('$nombre','$localidad')");
+            $sql = mysqli_query($mysqli,"INSERT INTO barrios(nombre,idcomuna)VALUES ('$nombre','$comuna')");
 
             if($sql){
                 header("location: ../../main.php?module=barrios&alert=1");
@@ -34,13 +34,13 @@ else {*/
 
                 $idbarrio = $_POST['idbarrio'];
                 $nombre  = mysqli_real_escape_string($mysqli, trim($_POST['nombre']));
-                $localidad  = mysqli_real_escape_string($mysqli, trim($_POST['localidad']));
+                $comuna  = mysqli_real_escape_string($mysqli, trim($_POST['comuna']));
 
                 $nombre = ucwords(strtolower($nombre));
             //    $updated_user = $_SESSION['id_user'];
 
                 $query = mysqli_query($mysqli, "UPDATE barrios SET nombre         = '$nombre',
-                                                                   idlocalidad    = '$localidad'
+                                                                   idcomuna    = '$comuna'
                                                                    
                                                                     
                                                               WHERE idbarrios  = '$idbarrio'")

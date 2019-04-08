@@ -16,6 +16,8 @@ else {*/
             // campos no obligatorios
             $telefono = 'No';
             $celular = 'No';
+            $parentezco = 'No';
+            $cedula_acudiente = 'No';
             $acudiente='No';
             $cel_acudiente='No';
             $correo_acudiente = 'No';
@@ -32,6 +34,12 @@ else {*/
             }
             if(!$_POST['acudiente']==''){
                 $acudiente  = mysqli_real_escape_string($mysqli, trim($_POST['acudiente']));
+            }
+            if(!$_POST['cedula_acudiente']==''){
+                $cedula_acudiente  = mysqli_real_escape_string($mysqli, trim($_POST['cedula_acudiente']));
+            }
+            if(!$_POST['parentezco']==''){
+                $parentezco  = mysqli_real_escape_string($mysqli, trim($_POST['parentezco']));
             }
             if(!$_POST['cel_acudiente']==''){
                 $cel_acudiente  = mysqli_real_escape_string($mysqli, trim($_POST['cel_acudiente']));
@@ -72,11 +80,11 @@ else {*/
             $empleado = $_SESSION['identificacion'];
 
 
-            $localidad = mysqli_query($mysqli,"SELECT localidad.idlocalidad FROM barrios INNER JOIN localidad ON localidad.idlocalidad = barrios.idlocalidad WHERE barrios.idbarrios = '$barrio'");
+           // $localidad = mysqli_query($mysqli,"SELECT localidad.idlocalidad FROM barrios INNER JOIN localidad ON localidad.idlocalidad = barrios.idlocalidad WHERE barrios.idbarrios = '$barrio'");
 
-            $data = mysqli_fetch_assoc($localidad);
+           // $data = mysqli_fetch_assoc($localidad);
 
-            $localidad = $data['idlocalidad'];
+          //  $localidad = $data['idlocalidad'];
             // convertir a mayuscula solo el primer caracter
             $nombre = ucwords(strtolower($nombre));
             $apellido = ucwords(strtolower($apellido));
@@ -98,15 +106,17 @@ else {*/
                                                             celular,lesion_efermedad_deportiva,
                                                             medicamentos,sisben,eps,correo,fecha_nacimiento,
                                                             edad,genero,empleados,idproyecto,modalidad,
-                                                            barrio_proyecto,idbarrio,localidad,acudiente,
-                                                            cel_acudiente,correo_acudiente)
+                                                            barrio_proyecto,idbarrio,acudiente,
+                                                            parentezco,cedula_acudiente,cel_acudiente,
+                                                            correo_acudiente)
                                                 VALUES('$identificacion','$nombre','$apellido',
                                                             '$grupo_sanguineo','$caracterizacion','$telefono',
                                                             '$celular','$lesion_efermedad_deportiva',
                                                             '$medicamentos','$sisben','$salud','$correo','$nacimiento',
                                                             '$edad','$genero','$empleado','$proyecto','$modalidad',
-                                                            '$barrio_proyecto','$barrio','$localidad','$acudiente',
-                                                            '$cel_acudiente','$correo_acudiente')")
+                                                            '$barrio_proyecto','$barrio','$acudiente',
+                                                            '$parentezco','$cedula_acudiente','$cel_acudiente',
+                                                            '$correo_acudiente')")
                                                 or die('error '.mysqli_error($mysqli)); 
                 if ($query) {
                     header("location: ../../main.php?module=usuarios&alert=1");
@@ -119,10 +129,13 @@ else {*/
     elseif ($_GET['act']=='update') {
         if (isset($_POST['Guardar'])) {
             if (isset($_POST['identificacion'])) {
-               
+                
+                $parentezco = 'No';
+                $cedula_acudiente = 'No';
                 $acudiente='No';
                 $cel_acudiente='No';
                 $correo_acudiente = 'No';
+                $modalidad = 'No';
 
                 $identificacion  = mysqli_real_escape_string($mysqli, trim($_POST['identificacion']));
                 $nombre  = mysqli_real_escape_string($mysqli, trim($_POST['nombre']));
@@ -141,11 +154,22 @@ else {*/
                 $sisben = mysqli_real_escape_string($mysqli, trim($_POST['sisben']));
                 $salud = mysqli_real_escape_string($mysqli, trim($_POST['eps']));
                 $proyecto  = mysqli_real_escape_string($mysqli, trim($_POST['proyecto']));
-                $modalidad = mysqli_real_escape_string($mysqli, trim($_POST['modalidad']));
                 $barrio_proyecto = mysqli_real_escape_string($mysqli, trim($_POST['barrio_proyecto']));
 
                 if(!$_POST['acudiente']==''){
                     $acudiente  = mysqli_real_escape_string($mysqli, trim($_POST['acudiente']));
+                }
+
+                if(!$_POST['modalidad']==''){
+                    $modalidad = mysqli_real_escape_string($mysqli, trim($_POST['modalidad']));
+                }
+
+             
+                if(!$_POST['parentezco']==''){
+                    $parentezco  = mysqli_real_escape_string($mysqli, trim($_POST['parentezco']));
+                }
+                if(!$_POST['cedula_acudiente']==''){
+                    $cedula_acudiente  = mysqli_real_escape_string($mysqli, trim($_POST['cedula_acudiente']));
                 }
                 if(!$_POST['cel_acudiente']==''){
                     $cel_acudiente  = mysqli_real_escape_string($mysqli, trim($_POST['cel_acudiente']));
@@ -161,11 +185,11 @@ else {*/
                 $empleado = $_SESSION['identificacion'];
     
                 //BUSCAR LA  LOCALIDAD A LA QUE PERTENECE EL BARRIO DONDE VIVE EL USUARIO
-                $localidad = mysqli_query($mysqli,"SELECT localidad.idlocalidad FROM barrios INNER JOIN localidad ON localidad.idlocalidad = barrios.idlocalidad WHERE barrios.idbarrios = '$barrio'");
+               // $localidad = mysqli_query($mysqli,"SELECT localidad.idlocalidad FROM barrios INNER JOIN localidad ON localidad.idlocalidad = barrios.idlocalidad WHERE barrios.idbarrios = '$barrio'");
                 
-                $data = mysqli_fetch_assoc($localidad);
+               // $data = mysqli_fetch_assoc($localidad);
     
-                $localidad = $data['idlocalidad'];
+              //  $localidad = $data['idlocalidad'];
                 
                 // NO CAMBIAR LA FECHA DE REGISTRO
                 $fecha_registro = mysqli_query($mysqli,"SELECT * FROM usuarios WHERE identificacion = '$identificacion'");
@@ -194,10 +218,11 @@ else {*/
                                                                     sisben              = '$sisben',
                                                                     eps                 = '$salud',
                                                                     idproyecto          = '$proyecto',
-                                                                    localidad           = '$localidad',
                                                                     modalidad           = '$modalidad',
                                                                     barrio_proyecto     = '$barrio_proyecto',
                                                                     acudiente           =  '$acudiente',
+                                                                    parentezco          =  '$parentezco',
+                                                                    cedula_acudiente    =  '$cel_acudiente',
                                                                     cel_acudiente       =  '$cel_acudiente',
                                                                     correo_acudiente     = '$correo_acudiente',
                                                                     fecha_registro      =  '$fecha_registro',

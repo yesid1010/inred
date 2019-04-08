@@ -34,17 +34,17 @@ if ($_GET['form']=='add') { ?>
 
 
               <?php 
-                  $query = mysqli_query($mysqli,"SELECT * FROM localidad"); 
+                  $query = mysqli_query($mysqli,"SELECT * FROM comunas"); 
               ?>
 
               
-                <label class="col-sm-2 control-label">Localidad</label>
+                <label class="col-sm-2 control-label">Comuna</label>
                 <div class="col-sm-3">
-                  <select class="form-control" name="localidad" required>
+                  <select class="form-control" name="comuna" required>
                     <option value=""></option>
                     <?php  while($data = mysqli_fetch_assoc($query)){?>
                     
-                    <option value="<?php echo $data['idlocalidad']?>"><?php echo $data['nombre']?></option>
+                    <option value="<?php echo $data['idcomuna']?>"><?php echo $data['nombre']?></option>
 
                     <?php } ?>
                   </select>
@@ -74,8 +74,11 @@ elseif ($_GET['form']=='edit') {
       $query = mysqli_query($mysqli, "SELECT barrios.idbarrios AS idbarrio,
                                              barrios.nombre AS nombre,
                                              localidad.nombre AS localidad,
-                                             localidad.idlocalidad  AS idlocalidad
-                                              FROM barrios INNER JOIN localidad ON barrios.idlocalidad = localidad.idlocalidad WHERE idbarrios='$_GET[id]'") 
+                                             localidad.idlocalidad  AS idlocalidad,
+                                             comunas.idcomuna AS idcomuna,
+                                             comunas.nombre AS comuna
+                                              FROM barrios INNER JOIN comunas ON barrios.idcomuna = comunas.idcomuna
+                                               INNER JOIN localidad ON comunas.idlocalidad = localidad.idlocalidad WHERE idbarrios='$_GET[id]'") 
                                       or die('error: '.mysqli_error($mysqli));
       $data  = mysqli_fetch_assoc($query);
     }	
@@ -112,17 +115,17 @@ elseif ($_GET['form']=='edit') {
 
 
               <?php 
-                  $query = mysqli_query($mysqli,"SELECT * FROM localidad"); 
+                  $query = mysqli_query($mysqli,"SELECT * FROM comunas"); 
               ?>
 
               
-                <label class="col-sm-2 control-label">Localidad</label>
+                <label class="col-sm-2 control-label">Comuna</label>
                 <div class="col-sm-3">
-                  <select class="form-control" name="localidad" required>
-                    <option value="<?php echo $data['idlocalidad']; ?>"><?php echo $data['localidad']; ?></option>
+                  <select class="form-control" name="comuna" required>
+                    <option value="<?php echo $data['idcomuna']; ?>"><?php echo $data['comuna']; ?></option>
                     <?php  while($data = mysqli_fetch_assoc($query)){?>
                     
-                    <option value="<?php echo $data['idlocalidad']?>"><?php echo $data['nombre']?></option>
+                    <option value="<?php echo $data['idcomuna']?>"><?php echo $data['nombre']?></option>
 
                     <?php } ?>
                   </select>

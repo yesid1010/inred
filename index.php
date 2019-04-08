@@ -24,7 +24,9 @@
     <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
 
   </head>
-  <body class="login-page bg-login">
+  <body class="login-page bg-login" style="background: #005AA7; background: -webkit-linear-gradient(to right, #FFFDE4, #005AA7); 
+background: linear-gradient(to right, #FFFDE4, #005AA7);
+">
     <div class="login-box">
       <div style="color:#3c8dbc" class="login-logo">
         <img style="margin-top:-12px" src="assets/img/inred_logo (1).png" alt="Logo" height="50">
@@ -68,7 +70,7 @@
           <br/>
           <div class="row">
             <div class="col-xs-12">
-              <input type="submit" class="btn btn-primary btn-lg btn-block btn-flat" name="login" value="Ingresar" />
+              <input type="submit" class="btn btn-primary btn-lg  btn-block btn-flat" name="login" value="Ingresar" />
             </div><!-- /.col -->
           </div>
         </form>

@@ -19,38 +19,38 @@
             <div class="box-body">
               <div class="col-md-4">
                 <div class="form-group">
-                  <label class="col-sm-4 control-label">Identificación</label>
+                  <label class="col-sm-4 control-label"><b>Identificación</b></label>
                   <div class="col-sm-7">
                     <input type="number" class="form-control" name="identificacion"  required>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-4 control-label">Nombres</label>
+                  <label class="col-sm-4 control-label"><b>Nombres</b></label>
                   <div class="col-sm-7">
                     <input type="text" class="form-control" name="nombre" autocomplete="off" required>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-4 control-label">Apellidos</label>
+                  <label class="col-sm-4 control-label"><b>Apellidos</b></label>
                   <div class="col-sm-7">
                     <input type="text" class="form-control" name="apellido" autocomplete="off" required>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-4 control-label">F.Nacimiento</label>
+                  <label class="col-sm-4 control-label"><b>F.Nacimiento</b></label>
                   <div class="col-sm-7">
                     <input type="date" class="form-control" id='calendario' name="nacimiento" autocomplete="off" required>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-4 control-label">Edad</label>
+                  <label class="col-sm-4 control-label"><b>Edad</b></label>
                   <div class="col-sm-7">
                     <input type="text" class="form-control" name="edad" id="edad" autocomplete="off"  readonly required>
                     <span id="edadCalculada"></span>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-4 control-label">Género</label>
+                  <label class="col-sm-4 control-label"><b>Género</b></label>
                   <div class="col-sm-7">
                     <select class="chosen-select" name="genero" data-placeholder="-- Seleccionar --" autocomplete="off" required>
                       <option value=""></option>
@@ -60,7 +60,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-4 control-label">Caracterización</label>
+                  <label class="col-sm-4 control-label"><b>Caracterización</b></label>
                   <div class="col-sm-7">
                     <select class="chosen-select" name="caracterizacion" data-placeholder="-- Seleccionar --" autocomplete="off" required>
                       <option value=""></option>
@@ -68,12 +68,12 @@
                       <option value="Desplazado">Desplazado</option>
                       <option value="Indigena">Indígena</option>
                       <option value="Afrocolombiano">Afrocolombiano</option>
-                      <option value="Convencional">Convencional</option>        
+                      <option value="N.A">N.A</option>        
                     </select>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-4 control-label">Tipo Sangre</label>
+                  <label class="col-sm-4 control-label"><b>Tipo Sangre</b></label>
                   <div class="col-sm-7">
                     <select class="chosen-select" name="grupo_sanguineo" data-placeholder="-- Seleccionar --" autocomplete="off" required>
                       <option value=""></option>
@@ -88,11 +88,8 @@
                     </select>
                   </div>
                 </div>
-             </div> <!-- div col 4-->
-
-             <div class="col-md-4">
-              <div class="form-group">
-                    <label class="col-sm-5 control-label">Barrio</label>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label"><b>Barrio</b></label>
                     <div class="col-sm-7">
                       <select class="chosen-select" name="barrio" data-placeholder="Barrio" autocomplete="off" required>
                         <option value=""></option>
@@ -105,35 +102,38 @@
                       </select>
                     </div>
                 </div>
+             </div> <!-- div col 4-->
+
+             <div class="col-md-4">
                 <div class="form-group">
-                  <label class="col-sm-5 control-label">Correo</label>
+                  <label class="col-sm-5 control-label"><b>Correo</b></label>
                   <div class="col-sm-7">
-                    <input type="email" class="form-control" name="correo" autocomplete="off" value="@" >
+                    <input type="email" class="form-control" name="correo" autocomplete="off" placeholder="@" >
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-5 control-label">Celular</label>
+                  <label class="col-sm-5 control-label"><b>Celular</b></label>
                   <div class="col-sm-7">
                     <input type="text" class="form-control" name="celular" autocomplete="off"  maxlength="10">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-5 control-label">fijo</label>
+                  <label class="col-sm-5 control-label"><b>fijo</b></label>
                   <div class="col-sm-7">
                     <input type="text" class="form-control" name="telefono" autocomplete="off"  maxlength="7">
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label class="col-sm-5 control-label">Lesión/Enfermedad</label>
-                  <label class="col-sm-1 control-label">Si</label>
+                  <label class="col-sm-5 control-label"><b>Lesión/Enfermedad</b></label>
+                  <label class="col-sm-1 ">Si</label>
                   <input type="radio" class="col-sm-1" value="1" name="lesion">
-                  <label class="col-sm-1 control-label">No</label>
+                  <label class="col-sm-1 ">No</label>
                   <input type="radio" class="col-sm-1" value="0" checked name="lesion">
                 </div>
                 <div id = "lesion">
                   <div class="form-group">
-                      <label class="col-sm-5 control-label">Cual : </label>
+                      <label class="col-sm-5 control-label"><b>Cual :</b> </label>
                       <div class="col-sm-7">
                         <input type="text" class="form-control" name="lesion_efermedad_deportiva" autocomplete="off"  >
                       </div>
@@ -141,40 +141,39 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-5 control-label">¿Medicamentos?</label>
-                    <label class="col-sm-1 control-label">Si</label>
+                    <label class="col-sm-5 control-label"><b>¿Medicamentos?</b></label>
+                    <label class="col-sm-1 ">Si</label>
                     <input type="radio" class="col-sm-1" value="yes" name="medi">
-                    <label class="col-sm-1 control-label">No</label>
+                    <label class="col-sm-1 ">No</label>
                     <input type="radio" class="col-sm-1" value="Not" checked name="medi">
                 </div>
                 <div id="medi">
                     <div class="form-group">
-                        <label class="col-sm-5 control-label">Cual : </label>
+                        <label class="col-sm-5 control-label"><b>Cual :</b> </label>
                         <div class="col-sm-7">
                           <input type="text" class="form-control" name="medicamentos" autocomplete="off"  >
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-5 control-label">¿ Sisben ?</label>
-                    <label class="col-sm-1 control-label">Si</label>
+                    <label class="col-sm-5 control-label"><b>¿ Sisben ?</b></label>
+                    <label class="col-sm-1 ">Si</label>
                     <input type="radio" class="col-sm-1" value="Si"  name="sisben">
-                    <label class="col-sm-1 control-label">No</label>
+                    <label class="col-sm-1">No</label>
                     <input type="radio" class="col-sm-1" value="No" checked  name="sisben">
+                </div>
+                <div class="form-group" >
+                    <label class="col-sm-5 control-label"><b>EPS</b></label>
+                    <div class="col-sm-7">
+                      <input type="text" class="form-control" name="eps" autocomplete="off" required>
+                    </div>
                 </div>
 
              </div> <!-- div col 4-->
 
              <div class="col-md-4">
-               
-             <div class="form-group" >
-                    <label class="col-sm-5 control-label">EPS</label>
-                    <div class="col-sm-7">
-                      <input type="text" class="form-control" name="eps" autocomplete="off" required>
-                    </div>
-                </div>
               <div class="form-group">
-                  <label class="col-sm-5 control-label">Proyecto</label>
+                  <label class="col-sm-5 control-label"><b>Proyecto</b></label>
                   <div class="col-sm-7">
                     <select class="chosen-select" name="proyecto" id="proyecto_add" data-placeholder="-- Seleccionar --" autocomplete="off" required>
                       <option value=""></option>
@@ -189,7 +188,7 @@
               </div>
          
                 <div class="form-group" id="modalidad_add" >
-                  <label class="col-sm-5 control-label">Modalidad</label>
+                  <label class="col-sm-5 control-label"><b>Deporte</b></label>
                   <div class="col-sm-7">
                     <select class="form-control" name="modalidad"  data-placeholder="-- Seleccionar --" autocomplete="off" >
             
@@ -204,14 +203,17 @@
                       <option value="Baloncesto">Baloncesto</option>
                       <option value="Lucha">Lucha</option>
                       <option value="Natacion">Natación</option>
-                      <option value="Futsal">Futsal</option>
+                      <option value="Futbol de Salon">Futbol de salón</option>
+                      <option value="Levantamiento de Peso">Levantamiento de Peso</option>
+                      <option value="Bmx">Bmx</option>
+                      <option value="Escuelas Nauticas">Escuelas Nauticas</option>
                     </select>
                   </div>
                 </div>
              
                 
               <div class="form-group">
-                <label class="col-sm-5 control-label">Barrio Proyecto</label>
+                <label class="col-sm-5 control-label"><b>Barrio Proyecto</b></label>
                 <div class="col-sm-7">
                   <select class="chosen-select" name="barrio_proyecto" data-placeholder="-- Seleccionar --" autocomplete="off" required>
                     <option value=""></option>
@@ -225,20 +227,40 @@
                 </div>
               </div>
               <div id ='acudiente'>
+               <P style="text-align: center;"> <b>DATOS DEL ACUDIENTE</b> </P>
+                          <hr>
                 <div class="form-group">
-                  <label class="col-sm-5 control-label">Acudiente</label>
+                  <label class="col-sm-5 control-label"><b>Parentezco</b></label>
+                  <div class="col-sm-7">
+                    <select class="form-control" name="parentezco" data-placeholder="-- Seleccionar --" autocomplete="off">
+                      <option value=""></option>
+                      <option value="Madre">Madre</option>
+                      <option value="Padre">Padre</option>
+                      <option value="Otro">Otro</option>
+                    </select>
+                  </div>
+                </div>
+               <div class="form-group">
+                  <label class="col-sm-5 control-label"><b>Cedula</b></label>
+                  <div class="col-sm-7">
+                    <input type="text" class="form-control" name="cedula_acudiente" autocomplete="off" >
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-5 control-label"><b>Nombre</b></label>
                   <div class="col-sm-7">
                     <input type="text" class="form-control" name="acudiente" autocomplete="off" >
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-5 control-label">Celular Acu.</label>
+                  <label class="col-sm-5 control-label"><b>Celular</b></label>
                   <div class="col-sm-7">
                     <input type="text" class="form-control" name="cel_acudiente" autocomplete="off" >
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-5 control-label">Correo Acudiente</label>
+                  <label class="col-sm-5 control-label"><b>Correo</b></label>
                   <div class="col-sm-7">
                     <input type="text" class="form-control" name="correo_acudiente" autocomplete="off"  >
                   </div>

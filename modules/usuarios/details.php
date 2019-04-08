@@ -22,14 +22,17 @@ if (isset($_GET['id'])) {
     usuarios.modalidad AS modalidad,
     usuarios.barrio_proyecto AS barrio_proyecto,
     usuarios.acudiente AS acudiente,
+    usuarios.cedula_acudiente AS cedula_acudiente,
     usuarios.cel_acudiente AS cel_acudiente,
+    usuarios.parentezco AS parentezco,
     usuarios.correo_acudiente AS correo_acudiente,
-    barrios.idbarrios AS idbarrio,
     localidad.nombre AS localidad,
+    comunas.nombre AS comuna,
     proyectos.idproyecto AS idproyecto
     FROM usuarios INNER JOIN barrios ON usuarios.idbarrio = barrios.idbarrios 
                   INNER JOIN proyectos ON usuarios.idproyecto = proyectos.idproyecto 
-                  INNER JOIN localidad ON barrios.idlocalidad = localidad.idlocalidad
+                  INNER JOIN comunas ON barrios.idcomuna = comunas.idcomuna
+                  INNER JOIN localidad ON comunas.idlocalidad = localidad.idlocalidad
                   WHERE usuarios.identificacion = '$id'");
 
     $data  = mysqli_fetch_assoc($query);
@@ -59,31 +62,31 @@ if (isset($_GET['id'])) {
                 <div class="form-group">
                   <label class="col-sm-4 control-label">Identificación</label>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control" name="identificacion" value="<?php echo $data['identificacion']; ?>" readonly required>
+                    <input type="text" class="form-control" value="<?php echo $data['identificacion']; ?>" readonly required>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-4 control-label">Nombres</label>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control" name="nombre"  value="<?php echo $data['nombre']; ?>" autocomplete="off" readonly required>
+                    <input type="text" class="form-control"  value="<?php echo $data['nombre']; ?>" autocomplete="off" readonly required>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-4 control-label">Apellidos</label>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control" name="apellido" value="<?php echo $data['apellido']; ?>" autocomplete="off" readonly required>
+                    <input type="text" class="form-control"  value="<?php echo $data['apellido']; ?>" autocomplete="off" readonly required>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-4 control-label">F.Nacimiento</label>
                   <div class="col-sm-7">
-                    <input type="date" class="form-control" id='calendario_edit' name="nacimiento" value="<?php echo $data['nacimiento']; ?>" readonly autocomplete="off" required>
+                    <input type="date" class="form-control"  value="<?php echo $data['nacimiento']; ?>" readonly autocomplete="off" required>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-4 control-label">Edad</label>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control" name="edad" id="edad_edit" value="<?php echo $data['edad']; ?>" autocomplete="off"  readonly required>
+                    <input type="text" class="form-control"  value="<?php echo $data['edad']; ?>" autocomplete="off"  readonly required>
                     <span id="edadCalculada"></span>
                   </div>
                 </div>
@@ -108,21 +111,28 @@ if (isset($_GET['id'])) {
                     <span id="edadCalculada"></span>
                   </div>
                 </div>
-
-             </div> <!-- div col 4-->
-        
-             <div class="col-md-4">
                 <div class="form-group">
-                  <label class="col-sm-5 control-label">Barrio</label>
+                  <label class="col-sm-4   control-label">Barrio</label>
                   <div class="col-sm-7">
                     <input type="text" class="form-control" value="<?php echo $data['barrio']; ?>" autocomplete="off" readonly  required>
                     <span id="edadCalculada"></span>
                   </div>
                 </div>
+             </div> <!-- div col 4-->
+        
+             <div class="col-md-4">
+
                 <div class="form-group">
                   <label class="col-sm-5 control-label">Localidad</label>
                   <div class="col-sm-7">
                     <input type="text" class="form-control" value="<?php echo $data['localidad']; ?>" autocomplete="off" readonly  required>
+                    <span id="edadCalculada"></span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-5 control-label">Comuna</label>
+                  <div class="col-sm-7">
+                    <input type="text" class="form-control" value="<?php echo $data['comuna']; ?>" autocomplete="off" readonly  required>
                     <span id="edadCalculada"></span>
                   </div>
                 </div>
@@ -138,13 +148,14 @@ if (isset($_GET['id'])) {
                     <input type="text" class="form-control" name="celular" value="<?php echo $data['celular']; ?>" readonly autocomplete="off"  maxlength="10">
                   </div>
                 </div>
+                <?php if($data['telefono'] != 'No'){?>
                 <div class="form-group">
                   <label class="col-sm-5 control-label">fijo</label>
                   <div class="col-sm-7">
                     <input type="text" class="form-control"  value="<?php echo $data['telefono']; ?>"  name="telefono"  readonly autocomplete="off"  maxlength="7">
                   </div>
                 </div>
-
+                <?php } ?>
                 <div >
                   <div class="form-group">
                       <label class="col-sm-5 control-label">Enfermedad/lesion</label>
@@ -166,26 +177,27 @@ if (isset($_GET['id'])) {
                     <label class="col-sm-5 control-label">¿ Sisben ?</label>
                     <?php
                        if($data['sisben']=='Si'){?>
-                          <label class="col-sm-1 control-label">Si</label>
+                          <label class="col-sm-1">Si</label>
                           <input type="radio" class="col-sm-1" checked value="Si" readonly>
                    <?php 
                         }else {?> 
-                          <label class="col-sm-1 control-label">No</label>
+                          <label class="col-sm-1 ">No</label>
                           <input type="radio" class="col-sm-1" value="No"  checked readonly>                      
                         <?php
                         } ?>
 
                 </div>
-             </div> <!-- div col 4-->
-                        
-             <div class="col-md-4">
-
-               <div class="form-group" >
+                <div class="form-group" >
                     <label class="col-sm-5 control-label">EPS</label>
                     <div class="col-sm-7">
                       <input type="text" class="form-control" value="<?php echo $data['eps']; ?>" readonly name="eps" autocomplete="off" required>
                     </div>
                 </div>
+             </div> <!-- div col 4-->
+                        
+             <div class="col-md-4">
+
+
                 <div class="form-group" >
                     <label class="col-sm-5 control-label">Proyecto</label>
                     <div class="col-sm-7">
@@ -195,7 +207,7 @@ if (isset($_GET['id'])) {
 
               <div id="modalidad_detail">
                 <div class="form-group" >
-                    <label class="col-sm-5 control-label">Modalidad</label>
+                    <label class="col-sm-5 control-label">Deporte</label>
                     <div class="col-sm-7">
                       <input type="text" class="form-control" value="<?php echo $data['modalidad']; ?>" readonly name="eps" autocomplete="off" required>
                     </div>
@@ -211,20 +223,34 @@ if (isset($_GET['id'])) {
               <?php
                   if($data['edad'] < 18){?>
                   <div id="edit_acudiente">
+                    <P style="text-align: center;"> <b>DATOS DEL ACUDIENTE</b> </P>
+                          <hr>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">Parentezco</label>
+                        <div class="col-sm-7">
+                          <input type="text" class="form-control" value = "<?php echo $data['parentezco']?>" readonly name="acudiente" autocomplete="off" >
+                        </div>
+                    </div>      
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">Cedula</label>
+                        <div class="col-sm-7">
+                          <input type="text" class="form-control" value = "<?php echo $data['cedula_acudiente']?>" readonly name="acudiente" autocomplete="off" >
+                        </div>
+                    </div>
                       <div class="form-group">
-                        <label class="col-sm-5 control-label">Acudiente</label>
+                        <label class="col-sm-5 control-label">Nombre</label>
                         <div class="col-sm-7">
                           <input type="text" class="form-control" value = "<?php echo $data['acudiente']?>" readonly name="acudiente" autocomplete="off" >
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="col-sm-5 control-label">Celular Acu.</label>
+                        <label class="col-sm-5 control-label">Celular</label>
                         <div class="col-sm-7">
                           <input type="text" class="form-control" value = "<?php echo $data['cel_acudiente']?>" readonly name="cel_acudiente" autocomplete="off" >
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="col-sm-5 control-label">Correo Acudiente</label>
+                        <label class="col-sm-5 control-label">Correo </label>
                         <div class="col-sm-7">
                           <input type="text" class="form-control" value = "<?php echo $data['correo_acudiente']?>" readonly name="correo_acudiente" autocomplete="off"  >
                         </div>

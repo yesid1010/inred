@@ -118,7 +118,8 @@ function editar_registro(){
 function buscar(){
     swal ( "Oops" ,  "Este Usuario Ya Se Encontraba Registrado!" ,  "error" )
 
-}
+} 
+
 
 function nuevo_registro(){
     swal({   

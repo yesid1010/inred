@@ -75,6 +75,21 @@
   <?php
 	}
 
+	if ($_GET["module"]=="reportes") { ?>
+    <li class="active">
+      <a href="?module=reportes"><i class="fa fa-user icon-title"></i> Reportes </a>
+      </li>
+  <?php
+  }
+
+  else { ?>
+    <li>
+      <a href="?module=reportes"><i class="fa fa-user icon-title"></i> Reportes</a>
+      </li>
+  <?php
+	}
+
+
 	if ($_GET["module"]=="password") { ?>
 		<li class="active">
 			<a href="?module=password"><i class="fa fa-lock"></i> Cambiar contraseña</a>

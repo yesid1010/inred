@@ -1,6 +1,6 @@
 <?php
-require('fpdf/fpdf.php');
-require('config/database.php');
+require('../../../fpdf/fpdf.php');
+require('../../../config/database.php');
 
 class PDF extends FPDF
 {
@@ -10,13 +10,14 @@ class PDF extends FPDF
 function Header()
 {
     // Logo
-    $this->Image('assets/img/inred_logo.png',5,5,30);
-    // Arial bold 15
+     $this->Image('../../../assets/img/inred_logo.png',15,15,45);
+    // // Arial bold 15
     $this->SetFont('Arial','B',15);
+    $this->Ln(20);
     // Movernos a la derecha
     $this->Cell(30);
     // Título
-    $this->Cell(120,10,'REPORTE DE PROYECTOS',0,0,'C');
+    $this->Cell(120,10,'REPORTE DE USUARIOS',0,0,'C');
     // Salto de línea
     $this->Ln(20);
 }

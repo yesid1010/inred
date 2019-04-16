@@ -50,7 +50,16 @@ else { // vista de inicio
 	elseif($_GET['module']=='form_proy'&& $_SESSION['permiso_acceso']==1){
 		include "modules/proyect/form.php";
 	}
-		
+	
+		// vista para los proyectos
+
+	elseif($_GET['module']=='reportes'&& $_SESSION['permiso_acceso']==1){
+		include "modules/reportes/usuarios/view.php";
+	}
+	// elseif($_GET['module']=='form_reportes'&& $_SESSION['permiso_acceso']==1){
+	// 	include "modules/proyect/form.php";
+	// }
+			
 	
 }
 ?>

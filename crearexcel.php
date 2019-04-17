@@ -7,20 +7,75 @@
 
  // clase para la esxcritura archivos xlsx
  use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-
+ use PhpOffice\PhpSpreadsheet\Style\Alignment;
+ use PhpOffice\PhpSpreadsheet\Style\Fill;
  use PhpOffice\PhpSpreadsheet\IOfactory;
  //ruta para guardar el archivo
- $ruta ='reportes/';
+ $ruta ='C:\Reportes_excel/';
+ $table = [
+        'font'=>[
+            'color'=>[
+                'rgb'=>'FFFFFF'
+            ],
+            'bold'=>true,
+            'size'=> 12
+        ],
+        'fill'=>[
+            'fillType'=>Fill::FILL_SOLID,
+            'startColor'=>[
+                'rgb'=>'538ED5'
+            ]
+        ],
+ ];
 
+ $evenRow = [
+    'fill'=>[
+        'fillType'=>Fill::FILL_SOLID,
+        'startColor'=>[
+            'rgb'=>'00BDFF'
+        ]
+    ],
+ ];
+ 
+ $oddRow = [
+    'fill'=>[
+        'fillType'=>Fill::FILL_SOLID,
+        'startColor'=>[
+            'rgb'=>'00EAFF'
+        ]
+    ],
+ ];
  // creamos un libro de trabajo
  $spreadsheet = new Spreadsheet();
- 
- // accedemos al objeto hoja
+
+
+$spreadsheet->getDefaultStyle()->getFont()
+            ->setName('Arial')
+            ->setSize(10);
+
+$spreadsheet->getActiveSheet()
+            ->setCellValue('A1',"Reporte De Usuarios");
+
+$spreadsheet->getActiveSheet()
+            ->mergeCells('A1:K1');
+
+$spreadsheet->getActiveSheet()
+            ->getStyle('A1')
+            ->getFont()->setSize(20);
+
+$spreadsheet->getActiveSheet()
+            ->getStyle('A1')
+            ->getAlignment()
+            ->setHorizontal(Alignment:: HORIZONTAL_CENTER);
+
+
+$spreadsheet->getActiveSheet()->getStyle('A2:Y2')->applyFromArray($table);
+// accedemos al objeto hoja
  $sheet= $spreadsheet->getActiveSheet();
 
  $spreadsheet->getActiveSheet()
               ->getColumnDimension('A')//id
-              ->setWidth(15);
+              ->setWidth(20);
 $spreadsheet->getActiveSheet()
             ->getColumnDimension('B')//nombre
             ->setWidth(15);
@@ -29,25 +84,25 @@ $spreadsheet->getActiveSheet()
             ->setWidth(20);
 $spreadsheet->getActiveSheet()
             ->getColumnDimension('D')//fecha nacimiento
-            ->setWidth(20);
+            ->setWidth(25);
 $spreadsheet->getActiveSheet()
             ->getColumnDimension('E')//edad
             ->setWidth(10);
 $spreadsheet->getActiveSheet()
             ->getColumnDimension('F')//genero
-            ->setWidth(10);
+            ->setWidth(15);
 $spreadsheet->getActiveSheet()
             ->getColumnDimension('G')//caracterizacion
-            ->setWidth(20);
+            ->setWidth(23);
 $spreadsheet->getActiveSheet()
             ->getColumnDimension('H')// tipo sangre
-            ->setWidth(10);
+            ->setWidth(15);
 $spreadsheet->getActiveSheet()
             ->getColumnDimension('I')//barrio
             ->setWidth(15);
 $spreadsheet->getActiveSheet()
             ->getColumnDimension('J')//localidad
-            ->setWidth(15);
+            ->setWidth(20);
 $spreadsheet->getActiveSheet()
             ->getColumnDimension('K')//comuna
             ->setWidth(20);
@@ -65,10 +120,10 @@ $spreadsheet->getActiveSheet()
             ->setWidth(15);
 $spreadsheet->getActiveSheet()
             ->getColumnDimension('P')//medicamentos
-            ->setWidth(15);
+            ->setWidth(20);
 $spreadsheet->getActiveSheet()
             ->getColumnDimension('Q') //sisben
-            ->setWidth(10);
+            ->setWidth(15);
 $spreadsheet->getActiveSheet()
             ->getColumnDimension('R')//eps
             ->setWidth(15);
@@ -77,16 +132,16 @@ $spreadsheet->getActiveSheet()
             ->setWidth(30);
 $spreadsheet->getActiveSheet()
             ->getColumnDimension('T') // deporte
-            ->setWidth(20);
+            ->setWidth(23);
 $spreadsheet->getActiveSheet()
             ->getColumnDimension('U') // barrio proyecto
             ->setWidth(20);
 $spreadsheet->getActiveSheet()
             ->getColumnDimension('V') // parentezco
-            ->setWidth(20);
+            ->setWidth(25);
 $spreadsheet->getActiveSheet()
             ->getColumnDimension('W') // cedula
-            ->setWidth(20);
+            ->setWidth(25);
 $spreadsheet->getActiveSheet()
             ->getColumnDimension('X') // nombre
             ->setWidth(20);
@@ -95,7 +150,7 @@ $spreadsheet->getActiveSheet()
             ->setWidth(20);
 $spreadsheet->getActiveSheet()
             ->getColumnDimension('Z') // correo
-            ->setWidth(20);
+            ->setWidth(23);
 
  $query = mysqli_query($mysqli,"SELECT 
             usuarios.identificacion AS identificacion, 
@@ -166,46 +221,57 @@ $spreadsheet->getActiveSheet()
 
 
  $fila=3;
+
  while ($data = mysqli_fetch_assoc($query)) {
-    $sheet->setCellValue('A'.$fila,$data['identificacion']);
-    $sheet->setCellValue('B'.$fila,$data['nombre']);
-    $sheet->setCellValue('C'.$fila,$data['apellido']);
-    $sheet->setCellValue('D'.$fila,$data['nacimiento']);
-    $sheet->setCellValue('E'.$fila,$data['edad']);
-    $sheet->setCellValue('F'.$fila,$data['genero']);
-    $sheet->setCellValue('G'.$fila,$data['caracterizacion']);
-    
-    $sheet->setCellValue('H'.$fila,$data['localidad']);
-    $sheet->setCellValue('I'.$fila,$data['comuna']); 
+        $sheet->setCellValue('A'.$fila,$data['identificacion']);
+        $sheet->setCellValue('B'.$fila,$data['nombre']);
+        $sheet->setCellValue('C'.$fila,$data['apellido']);
+        $sheet->setCellValue('D'.$fila,$data['nacimiento']);
+        $sheet->setCellValue('E'.$fila,$data['edad']);
+        $sheet->setCellValue('F'.$fila,$data['genero']);
+        $sheet->setCellValue('G'.$fila,$data['caracterizacion']);
+        
+        $sheet->setCellValue('H'.$fila,$data['localidad']);
+        $sheet->setCellValue('I'.$fila,$data['comuna']); 
 
-    $sheet->setCellValue('J'.$fila,$data['tipo_sangre']);
-    $sheet->setCellValue('K'.$fila,$data['barrio']);
-    $sheet->setCellValue('L'.$fila,$data['correo']);
-    $sheet->setCellValue('M'.$fila,$data['celular']);
-    $sheet->setCellValue('N'.$fila,$data['telefono']);
-    $sheet->setCellValue('O'.$fila,$data['lesion']);
-    $sheet->setCellValue('P'.$fila,$data['medicamentos']); 
+        $sheet->setCellValue('J'.$fila,$data['tipo_sangre']);
+        $sheet->setCellValue('K'.$fila,$data['barrio']);
+        $sheet->setCellValue('L'.$fila,$data['correo']);
+        $sheet->setCellValue('M'.$fila,$data['celular']);
+        $sheet->setCellValue('N'.$fila,$data['telefono']);
+        $sheet->setCellValue('O'.$fila,$data['lesion']);
+        $sheet->setCellValue('P'.$fila,$data['medicamentos']); 
 
-    $sheet->setCellValue('Q'.$fila,$data['sisben']);
-    $sheet->setCellValue('R'.$fila,$data['eps']);
-    $sheet->setCellValue('S'.$fila,$data['proyecto']);
-    // $sheet->setCellValue('T'.$fila,$data['modalidad']);
-    $sheet->setCellValue('T'.$fila,$data['barrio_proyecto']);
-    $sheet->setCellValue('U'.$fila,$data['acudiente']);
-    $sheet->setCellValue('V'.$fila,$data['cedula_acudiente']); 
+        $sheet->setCellValue('Q'.$fila,$data['sisben']);
+        $sheet->setCellValue('R'.$fila,$data['eps']);
+        $sheet->setCellValue('S'.$fila,$data['proyecto']);
+        // $sheet->setCellValue('T'.$fila,$data['modalidad']);
+        $sheet->setCellValue('T'.$fila,$data['barrio_proyecto']);
+        $sheet->setCellValue('U'.$fila,$data['acudiente']);
+        $sheet->setCellValue('V'.$fila,$data['cedula_acudiente']); 
 
-    $sheet->setCellValue('W'.$fila,$data['cel_acudiente']);
-    $sheet->setCellValue('X'.$fila,$data['parentezco']);
-    $sheet->setCellValue('Y'.$fila,$data['correo_acudiente']);
+        $sheet->setCellValue('W'.$fila,$data['cel_acudiente']);
+        $sheet->setCellValue('X'.$fila,$data['parentezco']);
+        $sheet->setCellValue('Y'.$fila,$data['correo_acudiente']);
+        if($fila % 2 == 0){
+            $spreadsheet->getActiveSheet()->getStyle('A'.$fila.':Y'.$fila)->applyFromArray($evenRow);
+        }else{
+            $spreadsheet->getActiveSheet()->getStyle('A'.$fila.':Y'.$fila)->applyFromArray($oddRow);
+        }
 
-    $fila++;
+        $fila++;
 }
 
+ $firsRow = 2;
+ $lastRow = $fila-1;
+ $spreadsheet->getActiveSheet()->setAutoFilter('A'.$firsRow.':Y'.$lastRow);
+ $date = date("Y-m-d");
  $writer = new Xlsx($spreadsheet);
 
  try {
-     $writer->save($ruta.'usuarios'.time().'.xlsx');
-     echo 'archivo creado'; 
+     $writer->save($ruta.'usuarios - '.$date.'-'.time().'.xlsx');
+
+     header("location: main.php?module=usuarios&alert=6");
  } catch (Exception $e) {
      echo $e->getMessage();
  }

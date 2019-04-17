@@ -1,9 +1,14 @@
 <section class="content-header">
   <h1>
     <i class="fa fa-folder-o icon-title"></i> Programas Sociales
-
     <a class="btn btn-primary btn-social pull-right" href="?module=form_medicines&form=add" title="agregar" data-toggle="tooltip">
-      <i class="fa fa-plus"></i> Agregar
+      <i class="fa fa-plus "></i> Agregar
+
+    </a> 
+    <p class=" pull-right"> &nbsp &nbsp &nbsp &nbsp &nbsp </p>
+    <a class="btn btn-success btn-social pull-right" href="../../ongnios/crearexcel.php" title="exportar" data-toggle="tooltip">
+      <i class="fa fa-print" aria-hidden="true"></i>
+       Exportar
     </a>
   </h1>
 
@@ -45,6 +50,14 @@
 
       <script>
         buscar()
+      </script>
+
+    <?php  
+
+    }elseif($_GET['alert'] == 6){?>
+
+      <script>
+        nuevo_reporte()
       </script>
 
     <?php  

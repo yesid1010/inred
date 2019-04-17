@@ -158,6 +158,24 @@ function borrar_registro(){
     });
 }
 
+function nuevo_reporte(){
+    swal({   
+        title: "Reporte Generado con Exito",     
+        type: "success",  
+
+        confirmButtonColor: "green",   
+        confirmButtonText: "¡Ok!",    
+        cancelButtonColor: "green",
+        closeOnConfirm: false}, 
+    
+        function(isConfirm){   
+            if (isConfirm) {     
+                window.location.href="main.php?module=usuarios"; 
+            }
+        
+    });
+}
+
 
 function calcularEdad(fecha) {
     var hoy = new Date();

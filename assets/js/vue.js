@@ -117,9 +117,29 @@ function editar_registro(){
 
 function buscar(){
     swal ( "Oops" ,  "Este Usuario Ya Se Encontraba Registrado!" ,  "error" )
-
+    
 } 
 
+function buscar2(){
+    swal({   
+        title: "!! Lo sentimos !!",  
+        text: "Este Usuario Ya Se Encontraba Registrado!",
+           
+        type: "error",  
+
+        confirmButtonColor: "green",   
+        confirmButtonText: "¡Ok!",    
+        cancelButtonColor: "green",
+        closeOnConfirm: false}, 
+    
+        function(isConfirm){   
+            if (isConfirm) {     
+                window.location.href="register.php"; 
+            }
+        
+    });
+    
+} 
 
 function nuevo_registro(){
     swal({   
@@ -134,6 +154,26 @@ function nuevo_registro(){
         function(isConfirm){   
             if (isConfirm) {     
                 window.location.href="main.php?module=usuarios"; 
+            }
+        
+    });
+}
+
+function nuevo_registroCliente(){
+    swal({   
+        title: "guardado con Exito",  
+        text: "Pronto nos comunicaremos con usted!!",
+           
+        type: "success",  
+
+        confirmButtonColor: "green",   
+        confirmButtonText: "¡Ok!",    
+        cancelButtonColor: "green",
+        closeOnConfirm: false}, 
+    
+        function(isConfirm){   
+            if (isConfirm) {     
+                window.location.href="register.php"; 
             }
         
     });

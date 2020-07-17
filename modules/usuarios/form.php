@@ -3,9 +3,9 @@
     include  "add.php";
   }
   else if($_GET['form']=='edit') { 
-    include "edit.php";
+    include "edit/edit.php";
   }
   else if($_GET['form']=='detalles') { 
-    include "details.php" ;
+    include "details/details.php" ;
   }
 ?>

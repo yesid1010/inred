@@ -1,8 +1,5 @@
-
-
 <?php
 session_start();
-
 
 require_once "../../config/database.php";
 
@@ -16,9 +13,14 @@ else {
 	if ($_GET['act']=='insert') {
 		if (isset($_POST['Guardar'])) {
 			
+			$tipo_identificacion = mysqli_real_escape_string($mysqli, trim($_POST['tipo_identificacion']));
 			$identificacion  = mysqli_real_escape_string($mysqli, trim($_POST['identificacion']));
 			$nombre  = mysqli_real_escape_string($mysqli, trim($_POST['nombre']));
 			$apellido  = mysqli_real_escape_string($mysqli, trim($_POST['apellido']));
+			$celular = mysqli_real_escape_string($mysqli, trim($_POST['celular']));
+			$genero = mysqli_real_escape_string($mysqli, trim($_POST['genero']));
+			$direccion = mysqli_real_escape_string($mysqli, trim($_POST['direccion']));
+			$fecha_nacimiento = mysqli_real_escape_string($mysqli, trim($_POST['fecha_nacimiento']));
 			$correo  = mysqli_real_escape_string($mysqli, trim($_POST['correo']));
 			$usuario  = mysqli_real_escape_string($mysqli, trim($_POST['usuario']));
 			$password  = md5(mysqli_real_escape_string($mysqli, trim($_POST['password'])));
@@ -28,7 +30,7 @@ else {
 			$nombre = ucwords(strtolower($nombre));
 			$apellido = ucwords(strtolower($apellido));
 			
-
+            // comprobamos si el empleado ya se encuentra registrado
 			$sql= mysqli_query($mysqli,"SELECT * FROM empleados WHERE identificacion='$identificacion'")
 			or die("hubo un error al consultar si el usuario existe".mysql_error($sql));
 
@@ -39,8 +41,8 @@ else {
 						header("location: ../../main.php?module=emp&alert=5");
 			}else{
 
-				$query = mysqli_query($mysqli, "INSERT INTO empleados(identificacion,nombre,apellido,correo,usuario,password,estado,idrol)
-												VALUES('$identificacion','$nombre','$apellido','$correo','$usuario','$password','$estado','$permisos_acceso')")
+				$query = mysqli_query($mysqli, "INSERT INTO empleados(tipo_identificacion,identificacion,nombre,apellido,celular,genero,direccion,fecha_nacimiento,correo,usuario,password,estado,idrol)
+												VALUES('$tipo_identificacion','$identificacion','$nombre','$apellido','$celular','$genero','$direccion','$fecha_nacimiento','$correo','$usuario','$password','$estado','$permisos_acceso')")
 												or die('error: '.mysqli_error($mysqli));    
 
 			
@@ -53,135 +55,41 @@ else {
 	
 	elseif ($_GET['act']=='update') {
 		if (isset($_POST['Guardar'])) {
-			if (isset($_POST['id_user'])) {
-				$id_user            = mysqli_real_escape_string($mysqli, trim($_POST['id_user']));
-				$username           = mysqli_real_escape_string($mysqli, trim($_POST['username']));
-				$password           = md5(mysqli_real_escape_string($mysqli, trim($_POST['password'])));
-				$name_user          = mysqli_real_escape_string($mysqli, trim($_POST['name_user']));
-				$email              = mysqli_real_escape_string($mysqli, trim($_POST['email']));
-				$telefono            = mysqli_real_escape_string($mysqli, trim($_POST['telefono']));
-				$permisos_acceso          = mysqli_real_escape_string($mysqli, trim($_POST['permisos_acceso']));
-				
-				$name_file          = $_FILES['foto']['name'];
-				$ukuran_file        = $_FILES['foto']['size'];
-				$tipe_file          = $_FILES['foto']['type'];
-				$tmp_file           = $_FILES['foto']['tmp_name'];
-				
-		
-				$allowed_extensions = array('jpg','jpeg','png');
-				
-			
-				$path_file          = "../../images/user/".$name_file;
-		
-				$file               = explode(".", $name_file);
-				$extension          = array_pop($file);
-
-				if (empty($_POST['password']) && empty($_FILES['foto']['name'])) {
-					
-                    $query = mysqli_query($mysqli, "UPDATE usuarios SET username 	= '$username',
-                    													name_user 	= '$name_user',
-                    													email       = '$email',
-                    													telefono     = '$telefono',
-                    													permisos_acceso   = '$permisos_acceso'
-                                                                  WHERE id_user 	= '$id_user'")
+			if (isset($_POST['identificacion'])) {
+                
+                
+				$tipo_identificacion = mysqli_real_escape_string($mysqli, trim($_POST['tipo_identificacion']));
+    			$identificacion      = mysqli_real_escape_string($mysqli, trim($_POST['identificacion']));
+    			$nombre              = mysqli_real_escape_string($mysqli, trim($_POST['nombre']));
+    			$apellido            = mysqli_real_escape_string($mysqli, trim($_POST['apellido']));
+    			$celular             = mysqli_real_escape_string($mysqli, trim($_POST['celular']));
+    			$genero              = mysqli_real_escape_string($mysqli, trim($_POST['genero']));
+    			$direccion           = mysqli_real_escape_string($mysqli, trim($_POST['direccion']));
+    			$fecha_nacimiento    = mysqli_real_escape_string($mysqli, trim($_POST['fecha_nacimiento']));
+    			$correo              = mysqli_real_escape_string($mysqli, trim($_POST['correo']));
+    			$usuario             = mysqli_real_escape_string($mysqli, trim($_POST['usuario']));
+			    $permisos_acceso     = mysqli_real_escape_string($mysqli, trim($_POST['rol']));
+			    
+			    
+			    
+			    $query = mysqli_query($mysqli, "UPDATE empleados SET    tipo_identificacion 	= '$tipo_identificacion',
+                    													nombre 	= '$nombre',
+                    													apellido       = '$apellido',
+                    													celular     = '$celular',
+                    													genero   = '$genero',
+                    													direccion 	= '$direccion',
+                    													fecha_nacimiento       = '$fecha_nacimiento',
+                    													correo     = '$correo',
+                    													usuario   = '$usuario',
+                    													idrol   = '$permisos_acceso'
+                                                                        WHERE identificacion 	= '$identificacion'")
                                                     or die('error: '.mysqli_error($mysqli));
-
+                
                 
                     if ($query) {
                   
-                        header("location: ../../main.php?module=user&alert=2");
+                        header("location: ../../main.php?module=emp&alert=2");
                     }
-				}
-		
-				elseif (!empty($_POST['password']) && empty($_FILES['foto']['name'])) {
-					
-                    $query = mysqli_query($mysqli, "UPDATE usuarios SET username 	= '$username',
-                    													name_user 	= '$name_user',
-                    													password 	= '$password',
-                    													email       = '$email',
-                    													telefono     = '$telefono',
-                    													permisos_acceso   = '$permisos_acceso'
-                                                                  WHERE id_user 	= '$id_user'")
-                                                    or die('error : '.mysqli_error($mysqli));
-
-             
-                    if ($query) {
-                    
-                        header("location: ../../main.php?module=user&alert=2");
-                    }
-				}
-				
-				elseif (empty($_POST['password']) && !empty($_FILES['foto']['name'])) {
-			
-					if (in_array($extension, $allowed_extensions)) {
-	                
-	                    if($ukuran_file <= 1000000) { 
-	                        
-	                        if(move_uploaded_file($tmp_file, $path_file)) { 
-                        		
-			                    $query = mysqli_query($mysqli, "UPDATE usuarios SET username 	= '$username',
-			                    													name_user 	= '$name_user',
-			                    													email       = '$email',
-			                    													telefono     = '$telefono',
-			                    													foto 		= '$name_file',
-			                    													permisos_acceso   = '$permisos_acceso'
-			                                                                  WHERE id_user 	= '$id_user'")
-			                                                    or die('error : '.mysqli_error($mysqli));
-
-			                    if ($query) {
-			                    
-			                        header("location: ../../main.php?module=user&alert=2");
-			                    }
-                        	} else {
-	                           
-	                            header("location: ../../main.php?module=user&alert=5");
-	                        }
-	                    } else {
-	                       
-	                        header("location: ../../main.php?module=user&alert=6");
-	                    }
-	                } else {
-	                   
-	                    header("location: ../../main.php?module=user&alert=7");
-	                } 
-				}
-				
-				else {
-					
-					if (in_array($extension, $allowed_extensions)) {
-	                   
-	                    if($ukuran_file <= 1000000) { 
-	                       
-	                        if(move_uploaded_file($tmp_file, $path_file)) { 
-                        		
-			                    $query = mysqli_query($mysqli, "UPDATE usuarios SET username 	= '$username',
-			                    													name_user 	= '$name_user',
-			                    													password    = '$password',
-			                    													email       = '$email',
-			                    													telefono     = '$telefono',
-			                    													foto 		= '$name_file',
-			                    													permisos_acceso   = '$permisos_acceso'
-			                                                                  WHERE id_user 	= '$id_user'")
-			                                                    or die('error: '.mysqli_error($mysqli));
-
-			                    
-			                    if ($query) {
-			                       
-			                        header("location: ../../main.php?module=user&alert=2");
-			                    }
-                        	} else {
-	                            
-	                            header("location: ../../main.php?module=user&alert=5");
-	                        }
-	                    } else {
-	                       
-	                        header("location: ../../main.php?module=user&alert=6");
-	                    }
-	                } else {
-	                
-	                    header("location: ../../main.php?module=user&alert=7");
-	                } 
-				}
 			}
 		}
 	}

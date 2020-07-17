@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 
@@ -243,6 +242,30 @@ else {*/
     elseif ($_GET['act']=='delete') {
         if (isset($_GET['id'])) {
             $identificacion = $_GET['id'];
+            $idproyecto = $_GET['pr'];
+            
+            $ruta_foto = 'images/'.$identificacion;
+            $ruta_documento = 'documentos/'.$identificacion;
+            
+            
+            if($idproyecto == 3){ // si es muevete samario
+                if(is_dir($ruta_foto)){ //eliminamos la carpeta y la foto 
+                    eliminar_dir($ruta_foto);
+                }
+            }else{
+                if($idproyecto == 2){ // si es escuelas populares del deporte
+                    if(is_dir($ruta_foto)){ //eliminamos la carpeta y la foto 
+                        eliminar_dir($ruta_foto);
+                    }
+                    if(is_dir($ruta_documento)){ //eliminamos la carpeta y los documentos 
+                        eliminar_dir($ruta_documento);
+                    }
+                }
+            }
+            
+
+            
+            
       
             $query = mysqli_query($mysqli, "DELETE FROM usuarios WHERE identificacion='$identificacion'")
                                             or die('error '.mysqli_error($mysqli));
@@ -253,6 +276,18 @@ else {*/
                 header("location: ../../main.php?module=usuarios&alert=3");
             }
         }
-    }     
+    }
+    
+    function eliminar_dir($ruta){
+        foreach(glob($ruta . "/*") as $elemento){
+            if(is_dir($elemento)){
+                eliminar_dir($elemento);
+            }else{
+                unlink($elemento);
+            }
+        }
+        
+        rmdir($ruta);
+    }
 //}       
 ?>

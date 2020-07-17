@@ -5,11 +5,11 @@
       <i class="fa fa-plus "></i> Agregar
 
     </a> 
-    <p class=" pull-right"> &nbsp &nbsp &nbsp &nbsp &nbsp </p>
+   <!-- <p class=" pull-right"> &nbsp &nbsp &nbsp &nbsp &nbsp </p>
     <a class="btn btn-success btn-social pull-right" href="../../ongnios/crearexcel.php" title="exportar" data-toggle="tooltip">
       <i class="fa fa-print" aria-hidden="true"></i>
        Exportar
-    </a>
+    </a>-->
   </h1>
 
 </section>
@@ -73,11 +73,11 @@
             <thead>
               <tr>
                 <th >No.</th>
-                <th >Identificación</th>
+                <th >Identificacion</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
-                <th >Género</th>
-                <th>Caracterización</th>
+                <th >Genero</th>
+                <th>Caracterizacion</th>
                 <th >Barrio</th>
                 <th >Proyecto</th>
                 <th >Edad</th>
@@ -97,6 +97,7 @@
                                                   usuarios.edad AS edad,
                                                   barrios.nombre AS barrio,
                                                   proyectos.nombre AS proyecto,
+                                                  proyectos.idproyecto AS idproyecto,
                                                   usuarios.caracterizacion AS caracterizacion
                                                   FROM usuarios INNER JOIN barrios ON usuarios.idbarrio = barrios.idbarrios 
                                                                 INNER JOIN proyectos ON usuarios.idproyecto = proyectos.idproyecto ");
@@ -123,7 +124,7 @@
                               <i style='color:#fff' class='glyphicon glyphicon-edit'></i>
                           </a>
 
-                          <a data-toggle="tooltip" data-placement="top" title="Eliminar" class="btn btn-danger btn-sm" href="modules/usuarios/proses.php?act=delete&id=<?php echo $data['identificacion'];?>" onclick="return confirm('estas seguro de eliminar<?php echo $data['nombre']; ?> ?');">
+                          <a data-toggle="tooltip" data-placement="top" title="Eliminar" class="btn btn-danger btn-sm" href="modules/usuarios/proses.php?act=delete&id=<?php echo $data['identificacion'];?>&pr=<?php echo $data['idproyecto']?>" onclick="return confirm('estas seguro de eliminar<?php echo $data['nombre']; ?> ?');">
                               <i style="color:#fff" class="glyphicon glyphicon-trash"></i>
                           </a>
                           <?php }

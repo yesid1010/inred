@@ -1,5 +1,3 @@
-
-
 <section class="content-header">
   <h1>
     <i class="fa fa-user icon-title"></i> Gestión de Empleados
@@ -34,7 +32,7 @@
       echo "<div class='alert alert-success alert-dismissable'>
               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
               <h4>  <i class='icon fa fa-check-circle'></i> Exito!</h4>
-           Los datos de usuario ha sido cambiado satisfactoriamente.
+           Los datos de usuario han sido cambiado satisfactoriamente.
             </div>";
     }
 
@@ -89,8 +87,8 @@
                 <th class="center">Nombre</th>
                 <th class="center">Apellido</th>
                 <th class="center">Correo</th>
-                <th class="center">Registrado</th>
-                <th class="center">Permisos de acceso</th>
+                <th class="center">Celular</th>
+                <th class="center">Cargo</th>
                 <th class="center">Estado</th>
                 <th class="center"></th>
               </tr>
@@ -107,6 +105,7 @@
                                                    empleados.apellido AS apellido,
                                                    empleados.correo AS correo,
                                                    empleados.fecha_registro AS fecha,
+                                                   empleados.celular AS celular,
                                                    roles.nombre AS rol
                                                    FROM empleados INNER JOIN roles ON empleados.idrol = roles.idrol WHERE roles.idrol!=1 ORDER BY apellido DESC")
                                             or die('error: '.mysqli_error($mysqli));
@@ -129,7 +128,7 @@
                       <td>$data[nombre]</td>
                       <td>$data[apellido]</td>
                       <td>$data[correo]</td>
-                      <td>$data[fecha]</td>
+                      <td>$data[celular]</td>
                       <td>$data[rol]</td>
                       <td>$data[estado]</td>
                     
@@ -154,7 +153,7 @@
             <?php
                           }
 
-              echo "      <a data-toggle='tooltip' data-placement='top' title='Modificar' onclick='return alert(`EN manteniento`)' class='btn btn-primary btn-sm' href='?module=emp'>
+              echo "      <a data-toggle='tooltip' data-placement='top' title='Modificar'  class='btn btn-primary btn-sm' href='?module=form_emp&form=edit&id=$data[identificacion]'>
                                 <i style='color:#fff' class='glyphicon glyphicon-edit'></i>
                             </a>
                           </div>

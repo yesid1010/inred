@@ -87,7 +87,7 @@ session_start();
       <header class="main-header">
         <!-- Logo -->
         <a href="?module=start" class="logo">
-          <img style="margin-top:-3px;margin-right:5px" width="80%" src="assets/img/inred_logo (1).png" alt="Logo"> 
+          <img style="margin-top:-3px;margin-right:5px"  width="80%" src="assets/img/inred_logo (1).png" alt="Logo"> 
         </a>
 
         <nav class="navbar navbar-static-top" role="navigation">

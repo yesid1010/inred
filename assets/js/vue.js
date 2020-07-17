@@ -2,18 +2,37 @@ $(document).ready(function() {
     $('#acudiente').hide();
     $('#lesion').hide();
     $('#medi').hide();
-    $('#modalidad_add').hide();
+    //$('#modalidad_add').hide();
+    $('#barrio_ms').hide();
+    $('#barrio_proyecto').hide();
+   // $('#escuelas_pd').hide();
+    $('#muevete_sm').hide();
+    
+    
+   // $(".alert").fadeOut(4000 );
 
-    $('#calendario').change(function() {
-        var date = $("#calendario").val();
+    //$('#lesion_enfermedad').hide();
+    //$('#medicamentos').hide();
+    //$('#sisben').hide();
+    //$('#eps').hide();
+
+    $('#calendario2').change(function() {
+        var date = $("#calendario2").val();
 
         var edad = calcularEdad(date);
   
-        $('#edad').val(edad);
-        if($('#edad').val() < 18){
-            $('#acudiente').show();
-        }else{
-            $('#acudiente').hide(); 
+        $('#edad2').val(edad);
+        // if($('#edad').val() < 18){
+        //     $('#acudiente').show();
+        // }else{
+        //     $('#acudiente').hide(); 
+        // }
+
+        if($('#edad2').val() < 5 || $('#edad2').val() > 15){
+            
+         swal ( "Oops" ,  "Solo se admiten menores de 6 a 14 años!" ,  "error" )
+         
+         $('#edad2').val('');
         }
     });
 
@@ -31,13 +50,22 @@ $(document).ready(function() {
     });
 
 
+    $('#calendario_edit_pd').change(function() {
+        let date = $("#calendario_edit_pd").val();
 
-    $('#calendario2').change(function() {
-        var date = $("#calendario2").val();
+        let edad = calcularEdad(date);
+  
+        $('#edad_edit_pd').val(edad);
+
+    });
+    
+
+    $('#calendario').change(function() {
+        var date = $("#calendario").val();
 
         var edad = calcularEdad(date);
   
-        $('#edad2').val(edad);
+        $('#edad').val(edad);
     });
 
     $('input:radio[name=lesion]').change(function(){
@@ -60,13 +88,37 @@ $(document).ready(function() {
         }
     })
 
+    // escoger proyecto
     $('#proyecto_add').change(function(){
         var proyecto = $('#proyecto_add').val();
-        if((proyecto == 1 )||(proyecto == 3 )||(proyecto == 4 )||(proyecto == 5 )){
-            $('#modalidad_add').show();
-        }else{
+
+        if((proyecto == 3)){ // si es muevete samario
+            $('#muevete_sm').show();
+            $('#escuelas_pd').hide();
+            $('#barrio_ms').show();
+            $('#medicamentos').hide();
+            $('#sisben').hide();
+            $('#eps').hide()
             $('#modalidad_add').hide();
+        }else{
+            if((proyecto == 2)){ // si es escuelas populares del deporte
+                $('#muevete_sm').hide();
+                $('#escuelas_pd').show();
+                $('#barrio_ms').hide()
+                $('#modalidad_add').show();
+                $('#sisben').show();
+                $('#eps').show()
+            }else{
+                if((proyecto==1)||(proyecto == 4 )||(proyecto == 5 )){ // si son los otros proyectos
+                    $('#escuelas_pd').hide();
+                    $('#muevete_sm').hide();
+                    $('#barrio_ms').hide();
+                    $('#modalidad_add').hide();
+                }
+            }
+            
         }
+
     })
 
     var proyecto_edit = $('#proyecto_edit').val();
@@ -119,6 +171,8 @@ function buscar(){
     swal ( "Oops" ,  "Este Usuario Ya Se Encontraba Registrado!" ,  "error" )
     
 } 
+
+
 
 function buscar2(){
     swal({   

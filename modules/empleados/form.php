@@ -1,5 +1,3 @@
-
-
 <?php  
 
 
@@ -26,21 +24,39 @@ if ($_GET['form']=='add') { ?>
 
 
               <div class="form-group">
-                <label class="col-sm-2 control-label">Cedula</label>
+                <label class="col-sm-2 control-label">Tipo de identificacion</label>
+                <div class="col-sm-5">
+                    <select class="form-control" name="tipo_identificacion" required>
+                    <option value="TI">TI</option>
+                    <option value="CC">CC</option>
+                    <option value="CE">CE</option>
+                    <option value="PS">PS</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Numero identificacion</label>
                 <div class="col-sm-5">
                   <input type="text" class="form-control" name="identificacion" autocomplete="off" required>
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">Nombre</label>
+                <label class="col-sm-2 control-label">Nombres</label>
                 <div class="col-sm-5">
                   <input type="text" class="form-control" name="nombre" autocomplete="off" required>
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">Apellido</label>
+                <label class="col-sm-2 control-label">Apellidos</label>
                 <div class="col-sm-5">
                   <input type="text" class="form-control" name="apellido" autocomplete="off" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Celular</label>
+                <div class="col-sm-5">
+                  <input type="text" class="form-control" name="celular" autocomplete="off" required>
                 </div>
               </div>
               <div class="form-group">
@@ -49,7 +65,32 @@ if ($_GET['form']=='add') { ?>
                   <input type="email" class="form-control" name="correo" autocomplete="off" required>
                 </div>
               </div>
-
+              
+             <div class="form-group">
+                <label class="col-sm-2 control-label">Genero</label>
+                <div class="col-sm-5">
+                    <select class="form-control" name="genero" required>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Otro">Otro</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Direccion</label>
+                <div class="col-sm-5">
+                  <input type="text" class="form-control" name="direccion" autocomplete="off" required>
+                </div>
+              </div>
+              
+             <div class="form-group">
+                <label class="col-sm-2 control-label">Fecha nacimiento</label>
+                <div class="col-sm-5">
+                  <input type="date" class="form-control" name="fecha_nacimiento" autocomplete="off" required>
+                </div>
+              </div>
+              
               <div class="form-group">
                 <label class="col-sm-2 control-label">Nombre de usuario</label>
                 <div class="col-sm-5">
@@ -58,7 +99,7 @@ if ($_GET['form']=='add') { ?>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-2 control-label">Contraseña</label>
+                <label class="col-sm-2 control-label">Contrase単a</label>
                 <div class="col-sm-5">
                   <input type="password" class="form-control" name="password" autocomplete="off" required>
                 </div>
@@ -70,7 +111,7 @@ if ($_GET['form']=='add') { ?>
               ?>
 
               <div class="form-group">
-                <label class="col-sm-2 control-label">Permisos de acceso</label>
+                <label class="col-sm-2 control-label">Cargo</label>
                 <div class="col-sm-5">
                   <select class="form-control" name="rol" required>
                     <option value=""></option>
@@ -103,9 +144,14 @@ if ($_GET['form']=='add') { ?>
 elseif ($_GET['form']=='edit') { 
   	if (isset($_GET['id'])) {
 
-      $query = mysqli_query($mysqli, "SELECT empleados.identificacion AS identificacion,
+      $query = mysqli_query($mysqli, "SELECT empleados.tipo_identificacion AS tipo_identificacion,
+                                             empleados.identificacion AS identificacion,
                                              empleados.nombre AS nombre,
                                              empleados.apellido AS apellido,
+                                             empleados.celular AS celular,
+                                             empleados.genero AS genero,
+                                             empleados.direccion AS direccion,
+                                             empleados.fecha_nacimiento AS fecha_nacimiento,
                                              empleados.correo AS correo,
                                              empleados.usuario AS usuario,
                                              empleados.estado AS estado,
@@ -120,11 +166,11 @@ elseif ($_GET['form']=='edit') {
 
   <section class="content-header">
     <h1>
-      <i class="fa fa-edit icon-title"></i> Modificar datos de Usuario
+      <i class="fa fa-edit icon-title"></i> Modificar datos de Empleado
     </h1>
     <ol class="breadcrumb">
       <li><a href="?module=beranda"><i class="fa fa-home"></i> Inicio</a></li>
-      <li><a href="?module=user"> Usuario </a></li>
+      <li><a href="?module=user"> Empleado </a></li>
       <li class="active"> Modificar </li>
     </ol>
   </section>
@@ -139,6 +185,19 @@ elseif ($_GET['form']=='edit') {
             <div class="box-body">
 
               <!--<input type="hidden" name="" value="<?php //echo $data['identificacion']; ?>">-->
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Tipo de identificacion</label>
+                <div class="col-sm-5">
+                    <select class="form-control" name="tipo_identificacion" required>
+                    <option value="<?php echo $data['tipo_identificacion']; ?>"><?php echo $data['tipo_identificacion']; ?></option>
+                    <option value="TI">TI</option>
+                    <option value="CC">CC</option>
+                    <option value="CE">CE</option>
+                    <option value="PS">PS</option>
+                  </select>
+                </div>
+              </div>
+
               <div class="form-group">
                 <label class="col-sm-2 control-label">Identificacion</label>
                 <div class="col-sm-5">
@@ -159,14 +218,47 @@ elseif ($_GET['form']=='edit') {
                   <input type="text" class="form-control" name="apellido" autocomplete="off" value="<?php echo $data['apellido']; ?>" required>
                 </div>
               </div>
-
+              
               <div class="form-group">
+                <label class="col-sm-2 control-label">Celular</label>
+                <div class="col-sm-5">
+                  <input type="text" class="form-control" name="celular" autocomplete="off" value="<?php echo $data['celular']; ?>" required>
+                </div>
+              </div>
+                          
+             <div class="form-group">
                 <label class="col-sm-2 control-label">correo</label>
                 <div class="col-sm-5">
                   <input type="email" class="form-control" name="correo" autocomplete="off" value="<?php echo $data['correo']; ?>">
                 </div>
               </div>
             
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Genero</label>
+                <div class="col-sm-5">
+                    <select class="form-control" name="genero" required>
+                    <option value="<?php echo $data['genero']; ?>"><?php echo $data['genero']; ?></option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Otro">Otro</option>
+                  </select>
+                </div>
+              </div>
+              
+             <div class="form-group">
+                <label class="col-sm-2 control-label">direccion</label>
+                <div class="col-sm-5">
+                  <input type="text" class="form-control" name="direccion" autocomplete="off" value="<?php echo $data['direccion']; ?>" required>
+                </div>
+              </div>
+              
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Fecha de nacimiento</label>
+                <div class="col-sm-5">
+                  <input type="date" class="form-control" name="fecha_nacimiento" autocomplete="off" value="<?php echo $data['fecha_nacimiento']; ?>" required>
+                </div>
+              </div>
+              
               <div class="form-group">
                 <label class="col-sm-2 control-label">Usuario</label>
                 <div class="col-sm-5">
@@ -175,7 +267,7 @@ elseif ($_GET['form']=='edit') {
               </div>
 
               <div class="form-group">
-                <label class="col-sm-2 control-label">Permisos de acceso</label>
+                <label class="col-sm-2 control-label">Cargo</label>
                 <div class="col-sm-5">
                   <select class="form-control" name="rol" required>
                     <option value="<?php echo $data['idrol']; ?>"><?php echo $data['rol']; ?></option>
